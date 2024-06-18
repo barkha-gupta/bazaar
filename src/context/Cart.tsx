@@ -16,10 +16,12 @@ export interface CartItem {
 interface CartContextType {
   cartItems: CartItem[];
   addItemsToCart: (productToAdd: Product) => void;
+  removeItemsFromCart: (productToRemove: CartItem) => void;
 }
 export const CartContext = createContext<CartContextType>({
   cartItems: [],
   addItemsToCart: () => {},
+  removeItemsFromCart: () => {},
 });
 
 const addCartItem = (
@@ -45,6 +47,9 @@ const addCartItem = (
   //return new array
 };
 
+const removeCartItem = (cartItems: CartItem[], productToRemove: CartItem) =>
+  cartItems.filter((cartItem) => cartItem.id !== productToRemove.id);
+
 export const CartProvider = ({ children }: CartProviderProps) => {
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
     const storedCartItems = localStorage.getItem("cart");
@@ -55,6 +60,10 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     setCartItems(addCartItem(cartItems, productToAdd));
   };
 
+  const removeItemsFromCart = (productToRemove: CartItem) => {
+    setCartItems(removeCartItem(cartItems, productToRemove));
+  };
+
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
@@ -62,6 +71,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   const value = {
     cartItems,
     addItemsToCart,
+    removeItemsFromCart,
   };
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };

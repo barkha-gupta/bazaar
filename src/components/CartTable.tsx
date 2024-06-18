@@ -7,14 +7,17 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { CartItem } from "@/context/Cart";
+import { CartContext, CartItem } from "@/context/Cart";
 import RemoveIcon from "./RemoveIcon";
 import ChevronLeftIcon from "./ChevronLeftIcon";
 import ChevronRightIcon from "./ChevronRightIcon";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
 
 const CartTable = ({ cartItems }: any) => {
   const navigate = useNavigate();
+  const { removeItemsFromCart } = useContext(CartContext);
+
   return (
     <div className="border border-slate-100 rounded-lg">
       <Table className="w-[100%]">
@@ -50,7 +53,7 @@ const CartTable = ({ cartItems }: any) => {
               </TableCell>
               <TableCell>${item.price}</TableCell>
               <TableCell>
-                <RemoveIcon />
+                <RemoveIcon onClick={() => removeItemsFromCart(item)} />
               </TableCell>
             </TableRow>
           ))}
@@ -75,7 +78,9 @@ const CartTable = ({ cartItems }: any) => {
         </div>
 
         <div className="border border-slate-200 p-2 rounded-md  py-2 font-[600] bg-slate-700 text-white hover:bg-slate-800 custom-box-shadow">
-          <button>Checkout</button>
+          <Link to="/checkout">
+            <button>Checkout</button>
+          </Link>
         </div>
       </div>
     </div>

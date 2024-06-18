@@ -1,4 +1,10 @@
-const RemoveIcon = () => {
+import { FC, MouseEventHandler } from "react";
+
+interface RemoveIconProps {
+  onClick: MouseEventHandler<SVGSVGElement>;
+}
+
+const RemoveIcon: FC<RemoveIconProps> = ({ onClick }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -6,6 +12,7 @@ const RemoveIcon = () => {
       viewBox="0 0 24 24"
       strokeWidth={2}
       className="size-7 cursor-pointer stroke-slate-500"
+      onClick={onClick}
     >
       <path
         strokeLinecap="round"

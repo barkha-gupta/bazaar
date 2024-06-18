@@ -6,7 +6,7 @@ const ProductCard = ({ product }: any) => {
     <div className="border border-slate-100 rounded-xl w-[250px] min-h-[380px] flex flex-col p-2 items-center justify-evenly custom-box-shadow custom-font-size overflow-hidden">
       <div className="h-[200px]">
         <img
-          className="h-full object-fit overflow-hidden"
+          className="h-full object-contain overflow-hidden"
           src={product.image}
           alt={product.title}
         />
@@ -21,7 +21,7 @@ const ProductCard = ({ product }: any) => {
         </p>
       </div>
 
-      <AddToCartButton />
+      <AddToCartButton product={product} />
     </div>
   );
 };

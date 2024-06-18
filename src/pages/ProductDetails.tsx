@@ -51,13 +51,10 @@ const ProductDetails = () => {
         </div>
 
         <div className="h-[2px] bg-slate-200" />
-        <div className="text-sm text-slate-500">
+        <div className="text-sm text-slate-500 custom-font-size mb-4">
           {currentProduct?.description}
         </div>
-        {/* <div>
-          <div>Quantity</div>
-          
-        </div> */}
+
         <AddToCartButton product={currentProduct} />
       </div>
     </div>

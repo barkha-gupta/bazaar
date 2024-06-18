@@ -5,7 +5,7 @@ const ChevronRightIcon = () => {
       fill="none"
       viewBox="0 0 24 24"
       strokeWidth={2}
-      className="size-6 cursor-pointer stroke-slate-500"
+      className="size-6 cursor-not-allowed stroke-slate-500"
     >
       <path
         strokeLinecap="round"

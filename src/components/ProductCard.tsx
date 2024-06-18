@@ -3,7 +3,7 @@ import Star from "./Star";
 
 const ProductCard = ({ product }: any) => {
   return (
-    <div className="border border-slate-100 rounded-lg w-[250px] min-h-[380px] flex flex-col p-2 items-center justify-evenly custom-box-shadow custom-font-size overflow-hidden">
+    <div className="border border-slate-100 rounded-lg w-[250px] min-h-[380px] flex flex-col p-2 items-center justify-evenly custom-box-shadow overflow-hidden">
       <div className="h-[200px]">
         <img
           className="h-full object-contain overflow-hidden"

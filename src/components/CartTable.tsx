@@ -16,11 +16,11 @@ import { useContext } from "react";
 
 const CartTable = ({ cartItems }: any) => {
   const navigate = useNavigate();
-  const { removeItemsFromCart } = useContext(CartContext);
+  const { removeItemsFromCart, cartTotal } = useContext(CartContext);
 
   return (
-    <div className="border border-slate-100 rounded-lg">
-      <Table className="w-[100%]">
+    <div className="border border-slate-100 rounded-lg ">
+      <Table className="w-[100%] custom-font-size">
         <TableHeader>
           <TableRow>
             <TableHead>Product</TableHead>
@@ -43,9 +43,9 @@ const CartTable = ({ cartItems }: any) => {
                   />
                 </div>
               </TableCell>
-              <TableCell>{item.title}</TableCell>
+              <TableCell className="custom-font-size">{item.title}</TableCell>
               <TableCell>
-                <div className="flex gap-1 items-center">
+                <div className="flex gap-1 items-center hover:cursor-not-allowed">
                   <ChevronLeftIcon />
                   {item.quantity}
                   <ChevronRightIcon />
@@ -63,21 +63,21 @@ const CartTable = ({ cartItems }: any) => {
           <TableRow>
             <TableCell
               colSpan={3}
-              className="text-xl font-[600] text-slate-700"
+              className="text-xl font-[600] text-slate-700 custom-font-size"
             >
               Total
             </TableCell>
-            <TableCell>$2,500.00</TableCell>
+            <TableCell>${cartTotal}</TableCell>
           </TableRow>
         </TableFooter>
       </Table>
 
       <div className=" flex justify-end items-center gap-5">
-        <div className=" border border-slate-200  p-2 rounded-md  py-2 font-[600] hover:bg-slate-800 hover:text-white custom-box-shadow">
+        <div className=" border border-slate-200  p-2 rounded-md  py-2 font-[600] hover:bg-slate-800 hover:text-white custom-box-shadow custom-font-size">
           <button onClick={() => navigate("/")}>Continue Shopping</button>
         </div>
 
-        <div className="border border-slate-200 p-2 rounded-md  py-2 font-[600] bg-slate-700 text-white hover:bg-slate-800 custom-box-shadow">
+        <div className="border border-slate-200 p-2 rounded-md  py-2 font-[600] bg-slate-700 text-white hover:bg-slate-800 custom-box-shadow custom-font-size">
           <Link to="/checkout">
             <button>Checkout</button>
           </Link>

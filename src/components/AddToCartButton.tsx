@@ -11,7 +11,7 @@ const AddToCartButton = ({ product }: any) => {
     <div className="w-full ">
       <Link to="/cart">
         <button
-          className="w-full border border-slate-200 rounded-md  py-2 font-[600] bg-slate-700 text-white hover:bg-slate-800"
+          className="w-full border border-slate-200 rounded-md  py-2 font-[600] bg-slate-700 text-white hover:bg-slate-800 custom-font-size"
           onClick={() => addItemsToCart(product)}
         >
           Add to Cart

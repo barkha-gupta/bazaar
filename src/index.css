@@ -96,3 +96,11 @@
     font-size: 1rem;
   } */
 }
+
+.btn-primary {
+  @apply border border-slate-200 p-2 rounded-md font-[600] bg-slate-700 text-white hover:bg-slate-800 custom-box-shadow custom-font-size;
+}
+
+.btn-secondary {
+  @apply border border-slate-200 text-slate-700 p-2 rounded-md font-[600] hover:bg-slate-800 hover:text-white custom-box-shadow custom-font-size;
+}

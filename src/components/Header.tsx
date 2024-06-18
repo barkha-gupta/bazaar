@@ -37,7 +37,9 @@ const Header: FC = () => {
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger>
-                  <ShopIcon />
+                  <Link to="/">
+                    <ShopIcon />
+                  </Link>
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>Shop</p>
@@ -50,7 +52,9 @@ const Header: FC = () => {
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger>
-                  <ShoppingCartIcon />
+                  <Link to="/cart">
+                    <ShoppingCartIcon />
+                  </Link>
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>Cart</p>

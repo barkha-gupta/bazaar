@@ -21,19 +21,28 @@ export interface Product {
   };
 }
 
-interface ProductContextType {
-  productList: Product[];
-  setProductList: Dispatch<SetStateAction<Product>>;
-}
-// const initialState = {};
-export const ProductContext = createContext<ProductContextType | {}>({});
-
 interface ProductProviderProps {
   children: ReactNode;
 }
 
+interface ProductContextType {
+  productList: Product[];
+  categories: string[];
+  selectedCategory: string;
+  setSelectedCategory: Dispatch<SetStateAction<string>>;
+}
+// const initialState = {};
+export const ProductContext = createContext<ProductContextType>({
+  productList: [],
+  categories: [],
+  selectedCategory: "",
+  setSelectedCategory: () => {},
+});
+
 export const ProductProvider: FC<ProductProviderProps> = ({ children }) => {
   const [productList, setProductList] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
@@ -42,8 +51,17 @@ export const ProductProvider: FC<ProductProviderProps> = ({ children }) => {
       .catch((error) => console.error("Error fetching products:", error));
   }, []);
 
+  useEffect(() => {
+    fetch("https://fakestoreapi.com/products/categories")
+      .then((res) => res.json())
+      .then((json) => setCategories(json))
+      .catch((error) => console.error("Error fetching categories:", error));
+  }, []);
+
   return (
-    <ProductContext.Provider value={{ productList, setProductList }}>
+    <ProductContext.Provider
+      value={{ productList, categories, selectedCategory, setSelectedCategory }}
+    >
       {children}
     </ProductContext.Provider>
   );

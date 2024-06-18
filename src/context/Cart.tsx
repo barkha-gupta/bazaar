@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useEffect, useState } from "react";
+import { FC, ReactNode, createContext, useEffect, useState } from "react";
 import { Product } from "./product";
 
 interface CartProviderProps {
@@ -55,7 +55,7 @@ const removeCartItem = (cartItems: CartItem[], productToRemove: CartItem) =>
 const calculateCartTotal = (cartItems: CartItem[]) =>
   cartItems.reduce((total, ele) => total + ele.price * ele.quantity, 0);
 
-export const CartProvider = ({ children }: CartProviderProps) => {
+export const CartProvider: FC<CartProviderProps> = ({ children }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
     const storedCartItems = localStorage.getItem("cart");
     return storedCartItems ? JSON.parse(storedCartItems) : [];

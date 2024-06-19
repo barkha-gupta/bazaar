@@ -1,6 +1,7 @@
 import { ProductContext } from "@/context/product";
 import { useContext } from "react";
-import FilterIcon from "./FilterIcon";
+import SortDropdown from "./SortDropdown";
+import CrossIcon from "./CrossIcon";
 
 const AdvancedFilter = () => {
   const { categories, selectedCategory, setSelectedCategory } =
@@ -27,14 +28,12 @@ const AdvancedFilter = () => {
             onClick={() => setSelectedCategory("")}
             className="flex gap-1"
           >
-            <p>clear</p> <FilterIcon />
+            <p>clear</p> <CrossIcon />
           </button>
         </div>
       </div>
 
-      <div className="btn-secondary">
-        <button>sort</button>
-      </div>
+      <SortDropdown />
     </div>
   );
 };

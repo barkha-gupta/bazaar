@@ -51,7 +51,7 @@ const CartTable = ({ cartItems }: any) => {
                   <ChevronRightIcon />
                 </div>
               </TableCell>
-              <TableCell>${item.price}</TableCell>
+              <TableCell>${item.quantity * item.price}</TableCell>
               <TableCell>
                 <RemoveIcon onClick={() => removeItemsFromCart(item)} />
               </TableCell>

@@ -98,7 +98,6 @@ export const ProductProvider: FC<ProductProviderProps> = ({ children }) => {
       }
 
       if (searchQuery) {
-        console.log(updatedProducts);
         updatedProducts = updatedProducts.filter(
           (product) =>
             product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -106,7 +105,6 @@ export const ProductProvider: FC<ProductProviderProps> = ({ children }) => {
               .toLowerCase()
               .includes(searchQuery.toLowerCase())
         );
-        console.log(updatedProducts);
       }
 
       if (selectedSort) {

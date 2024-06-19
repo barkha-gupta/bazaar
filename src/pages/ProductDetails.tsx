@@ -36,6 +36,7 @@ const ProductDetails = () => {
           src={currentProduct?.image}
           alt={currentProduct?.title}
           className="h-full w-full object-contain overflown-hidden"
+          loading="lazy"
         />
       </div>
       <div className=" flex flex-col gap-2 justify-around p-5">

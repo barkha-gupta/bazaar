@@ -11,6 +11,7 @@ const ProductCard = ({ product }: any) => {
             className="h-full object-contain overflow-hidden"
             src={product.image}
             alt={product.title}
+            loading="lazy"
           />
         </Link>
       </div>

@@ -40,6 +40,7 @@ const CartTable = ({ cartItems }: any) => {
                     className="h-full object-contain overflow-hidden"
                     src={item.image}
                     alt={item.title}
+                    loading="lazy"
                   />
                 </div>
               </TableCell>

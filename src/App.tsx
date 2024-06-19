@@ -10,12 +10,13 @@ import Checkout from "./pages/Checkout";
 import Header from "./components/Header";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "./components/ErrorBoundary";
+import { Loading } from "./components/Loading";
 
 function App() {
   return (
     <>
       <ErrorBoundary FallbackComponent={ErrorFallback} onReset={() => {}}>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loading />}>
           <Routes>
             <Route path="/" element={<Header />}>
               <Route index element={<ProductList />} />

@@ -7,7 +7,7 @@ const Logo = () => {
       viewBox="0 0 78 32"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="size-10 sm:size-14"
+      className="size-10 sm:size-14 "
     >
       {" "}
       <path

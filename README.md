@@ -78,9 +78,10 @@ This command starts the Vite development server. It will automatically open your
 
 The main dependencies and libraries used in the project are:
 
-React
-React Router
-Vite
+1. React
+2. React Router
+3. Vite
+4. Tailwind
 
 ---
 

@@ -7,7 +7,7 @@ const AdvancedFilter = () => {
   const { categories, selectedCategory, setSelectedCategory } =
     useContext(ProductContext);
   return (
-    <div className="mt-4 p-5 flex items-center justify-between gap-5 ">
+    <div className="mt-4 p-5 flex justify-between gap-5 ">
       <div className="flex flex-wrap gap-2">
         {categories.map((category) => (
           <div

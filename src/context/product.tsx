@@ -33,6 +33,7 @@ export interface ProductContextType {
   filteredProductList: Product[];
   selectedSort: string;
   sortProducts: (sortType: string) => void;
+  setSearchQuery: Dispatch<SetStateAction<string>>;
 }
 
 export const ProductContext = createContext<ProductContextType>({
@@ -43,6 +44,7 @@ export const ProductContext = createContext<ProductContextType>({
   filteredProductList: [],
   selectedSort: "",
   sortProducts: () => {},
+  setSearchQuery: () => {},
 });
 
 const sortArray = (array: Product[], sortType: string) => {
@@ -68,6 +70,7 @@ export const ProductProvider: FC<ProductProviderProps> = ({ children }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [filteredProductList, setFilteredProductList] = useState<Product[]>([]);
   const [selectedSort, setSelectedSort] = useState<string>("");
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
@@ -85,29 +88,40 @@ export const ProductProvider: FC<ProductProviderProps> = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    const filterByCategory = (category: string) => {
-      if (selectedCategory === "") {
-        setFilteredProductList(productList);
-      } else {
-        setFilteredProductList(
-          productList.filter((product) => product.category === category)
+    const filterAndSortProducts = () => {
+      let updatedProducts = [...productList];
+
+      if (selectedCategory) {
+        updatedProducts = updatedProducts.filter(
+          (product) => product.category === selectedCategory
         );
       }
+
+      if (searchQuery) {
+        console.log(updatedProducts);
+        updatedProducts = updatedProducts.filter(
+          (product) =>
+            product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            product.description
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase())
+        );
+        console.log(updatedProducts);
+      }
+
+      if (selectedSort) {
+        updatedProducts = sortArray(updatedProducts, selectedSort);
+      }
+
+      setFilteredProductList(updatedProducts);
     };
 
-    filterByCategory(selectedCategory);
-  }, [selectedCategory, productList, setFilteredProductList]);
+    filterAndSortProducts();
+  }, [selectedCategory, selectedSort, searchQuery, productList]);
 
   const sortProducts = (sortType: string) => {
     if (selectedSort === sortType) return;
     setSelectedSort(sortType);
-
-    const sortedProducts =
-      sortType === "Remove Sorting"
-        ? productList
-        : sortArray([...filteredProductList], sortType);
-
-    setFilteredProductList(sortedProducts);
   };
 
   return (
@@ -120,6 +134,7 @@ export const ProductProvider: FC<ProductProviderProps> = ({ children }) => {
         filteredProductList,
         selectedSort,
         sortProducts,
+        setSearchQuery,
       }}
     >
       {children}

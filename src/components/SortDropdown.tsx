@@ -15,7 +15,7 @@ const SortDropdown = () => {
     <div>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <button className="border border-slate-200 text-slate-700 p-2 rounded-md font-[600] hover:bg-slate-800 hover:text-white custom-box-shadow text-sm flex gap-2">
+          <button className="border border-slate-200 text-slate-700 p-2 rounded-md font-[600] hover:bg-slate-800 hover:text-white custom-box-shadow text-sm flex gap-2 ">
             <p>Sort By</p> <FilterIcon />
           </button>
         </DropdownMenuTrigger>

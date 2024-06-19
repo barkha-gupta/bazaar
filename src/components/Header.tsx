@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { ChangeEvent, FC, useContext } from "react";
 import Logo from "./Logo";
 import { Link, Outlet } from "react-router-dom";
 import ShopIcon from "./ShopIcon";
@@ -12,8 +12,14 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import SearchIcon from "./SearchIcon";
+import { ProductContext } from "@/context/product";
 
 const Header: FC = () => {
+  const { setSearchQuery } = useContext(ProductContext);
+
+  const handleSearchQuery = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+  };
   return (
     <div>
       <div className="w-full flex justify-between items-center px-5 sm:flex-wrap gap-2">
@@ -27,6 +33,7 @@ const Header: FC = () => {
             type="text"
             placeholder="Search here folks"
             className="w-full pr-10 focus-visible:ring-1 focus-visible:ring-slate-700 focus-visible:border-none"
+            onChange={handleSearchQuery}
           />
           <div className="absolute right-1">
             <SearchIcon />

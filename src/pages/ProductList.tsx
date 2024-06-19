@@ -8,16 +8,18 @@ const ProductList = () => {
     useContext(ProductContext);
 
   return (
-    <div>
+    <>
       <div>
-        <AdvancedFilter />
+        <div>
+          <AdvancedFilter />
+        </div>
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 place-items-center border border-slate-100 rounded-lg m-2 py-5">
+          {filteredProductList.map((product: Product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
       </div>
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 place-items-center border border-slate-100 rounded-lg m-2 py-5">
-        {filteredProductList.map((product: Product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
-    </div>
+    </>
   );
 };
 

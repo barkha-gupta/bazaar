@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useContext } from "react";
+import { ChangeEvent, FC, useContext, useEffect, useState } from "react";
 import Logo from "./Logo";
 import { Link, Outlet } from "react-router-dom";
 import ShopIcon from "./ShopIcon";
@@ -13,12 +13,20 @@ import {
 } from "@/components/ui/tooltip";
 import SearchIcon from "./SearchIcon";
 import { ProductContext } from "@/context/product";
+import { useDebounce } from "@/hooks/useDebounce";
 
 const Header: FC = () => {
   const { setSearchQuery } = useContext(ProductContext);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+
+  const debouncedSearchQuery = useDebounce(searchTerm, 500);
+
+  useEffect(() => {
+    setSearchQuery(debouncedSearchQuery);
+  }, [debouncedSearchQuery, setSearchQuery]);
 
   const handleSearchQuery = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
+    setSearchTerm(e.target.value);
   };
   return (
     <div>

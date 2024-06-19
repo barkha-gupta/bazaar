@@ -1,5 +1,6 @@
 import { FC, ReactNode, createContext, useEffect, useState } from "react";
 import { Product } from "./product";
+import { toast } from "sonner";
 
 interface CartProviderProps {
   children: ReactNode;
@@ -30,14 +31,13 @@ const addCartItem = (
   cartItems: CartItem[],
   productToAdd: Product
 ): CartItem[] => {
-  console.log(productToAdd);
-
   //find if cartitems contains productToAdd
   const exsistingProduct = cartItems.find(
     (cartItem: CartItem) => cartItem.id === productToAdd.id
   );
   //if found - quantity ++
   if (exsistingProduct) {
+    toast.success("Item added to cart");
     return cartItems.map((cartItem: CartItem) =>
       cartItem.id === productToAdd.id
         ? { ...cartItem, quantity: (cartItem.quantity || 0) + 1 }
@@ -45,15 +45,29 @@ const addCartItem = (
     );
   }
 
+  toast.success("Item added to cart");
+
   return [...cartItems, { ...productToAdd, quantity: 1 }];
   //return new array
 };
 
-const removeCartItem = (cartItems: CartItem[], productToRemove: CartItem) =>
-  cartItems.filter((cartItem) => cartItem.id !== productToRemove.id);
+const removeCartItem = (cartItems: CartItem[], productToRemove: CartItem) => {
+  const updatedCartItems = cartItems.filter(
+    (cartItem) => cartItem.id !== productToRemove.id
+  );
 
-const calculateCartTotal = (cartItems: CartItem[]) =>
-  cartItems.reduce((total, ele) => total + ele.price * ele.quantity, 0);
+  toast.success("Item removed from cart");
+
+  return updatedCartItems;
+};
+
+const calculateCartTotal = (cartItems: CartItem[]) => {
+  const total = cartItems.reduce(
+    (total, ele) => total + ele.price * ele.quantity,
+    0
+  );
+  return Math.round(total * 100) / 100;
+};
 
 export const CartProvider: FC<CartProviderProps> = ({ children }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {

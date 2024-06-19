@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import AddToCartButton from "./AddToCartButton";
 import Star from "./Star";
 
@@ -5,11 +6,13 @@ const ProductCard = ({ product }: any) => {
   return (
     <div className="border border-slate-100 rounded-lg w-[250px] min-h-[380px] flex flex-col p-2 items-center justify-evenly custom-box-shadow overflow-hidden">
       <div className="h-[200px]">
-        <img
-          className="h-full object-contain overflow-hidden"
-          src={product.image}
-          alt={product.title}
-        />
+        <Link to={`/product/${product.id}`}>
+          <img
+            className="h-full object-contain overflow-hidden"
+            src={product.image}
+            alt={product.title}
+          />
+        </Link>
       </div>
 
       <div className="font-[600] text-center w-full">{product.title}</div>

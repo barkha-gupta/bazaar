@@ -88,33 +88,37 @@ export const ProductProvider: FC<ProductProviderProps> = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    const filterAndSortProducts = () => {
-      let updatedProducts = [...productList];
+    try {
+      const filterAndSortProducts = () => {
+        let updatedProducts = [...productList];
 
-      if (selectedCategory) {
-        updatedProducts = updatedProducts.filter(
-          (product) => product.category === selectedCategory
-        );
-      }
+        if (selectedCategory) {
+          updatedProducts = updatedProducts.filter(
+            (product) => product.category === selectedCategory
+          );
+        }
 
-      if (searchQuery) {
-        updatedProducts = updatedProducts.filter(
-          (product) =>
-            product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            product.description
-              .toLowerCase()
-              .includes(searchQuery.toLowerCase())
-        );
-      }
+        if (searchQuery) {
+          updatedProducts = updatedProducts.filter(
+            (product) =>
+              product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+              product.description
+                .toLowerCase()
+                .includes(searchQuery.toLowerCase())
+          );
+        }
 
-      if (selectedSort) {
-        updatedProducts = sortArray(updatedProducts, selectedSort);
-      }
+        if (selectedSort) {
+          updatedProducts = sortArray(updatedProducts, selectedSort);
+        }
 
-      setFilteredProductList(updatedProducts);
-    };
+        setFilteredProductList(updatedProducts);
+      };
 
-    filterAndSortProducts();
+      filterAndSortProducts();
+    } catch (error) {
+      console.error("Error while filtering : " + error);
+    }
   }, [selectedCategory, selectedSort, searchQuery, productList]);
 
   const sortProducts = (sortType: string) => {

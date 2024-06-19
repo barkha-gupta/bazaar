@@ -9,6 +9,7 @@ const AdvancedFilter = () => {
       <div className="flex flex-wrap gap-2">
         {categories.map((category) => (
           <div
+            key={category}
             className={`${
               selectedCategory === category ? "btn-primary" : "btn-secondary"
             }`}

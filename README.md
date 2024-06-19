@@ -23,11 +23,19 @@ Briefly describe the project, its purpose, and any relevant background informati
 
 ## Features
 
-List key features or functionalities of the project.
+# Key features or functionalities of the project.
 
-- Feature 1
-- Feature 2
-- Feature 3
+- Product Fetching: fetching products from FakeStore API
+- Product Display: displaying products in grid format and showing relevent information - title, price and rating.
+- Search: users can search products by typing title or description either by clickinig on the input or by pressing ctrl+k
+- Product Details Page: each product has a product details page which have all the information about the product
+- Product Filtering By Category: the products can be filtered by clicking on the category buttons
+- Sorting Products: products can be sorted based on 4 things - price(high to low), price(low to high), rating(high to low), rating(low to high)
+- Shopping Cart Functionality: users cab add product to cart and remove product from cart. users can view the cart contents in the cart page
+- Persist Shopping Cart: cart state is stored inside localstorage
+- Error Handling By Toasts Notification: toasts notification renders on adding product to cart or removing products from cart
+- Global State Management by context api
+- Performance Optimization: using techniques like lazy loading and code splitting for better performance
 
 ---
 

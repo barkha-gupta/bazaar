@@ -1,6 +1,3 @@
-import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu";
-import * as React from "react";
-
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -8,13 +5,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import FilterIcon from "./FilterIcon";
-
-type Checked = DropdownMenuCheckboxItemProps["checked"];
+import { useContext } from "react";
+import { ProductContext, ProductContextType } from "@/context/product";
 
 const SortDropdown = () => {
-  const [showStatusBar, setShowStatusBar] = React.useState<Checked>(true);
-  const [showActivityBar, setShowActivityBar] = React.useState<Checked>(false);
-  const [showPanel, setShowPanel] = React.useState<Checked>(false);
+  const { selectedSort, sortProducts }: ProductContextType =
+    useContext(ProductContext);
   return (
     <div>
       <DropdownMenu>
@@ -23,20 +19,45 @@ const SortDropdown = () => {
             <p>Sort By</p> <FilterIcon />
           </button>
         </DropdownMenuTrigger>
+
         <DropdownMenuContent className="w-52 ">
-          <DropdownMenuCheckboxItem className="focus:bg-slate-800 focus:text-white">
+          <DropdownMenuCheckboxItem
+            checked={selectedSort === "Price (High to Low)"}
+            onClick={() => sortProducts("Price (High to Low)")}
+            className="focus:bg-slate-800 focus:text-white"
+          >
             Price (High to Low)
           </DropdownMenuCheckboxItem>
-          <DropdownMenuCheckboxItem className="focus:bg-slate-800 focus:text-white">
+
+          <DropdownMenuCheckboxItem
+            checked={selectedSort === "Price (Low to High)"}
+            onClick={() => sortProducts("Price (Low to High)")}
+            className="focus:bg-slate-800 focus:text-white"
+          >
             Price (Low to High)
           </DropdownMenuCheckboxItem>
-          <DropdownMenuCheckboxItem className="focus:bg-slate-800 focus:text-white">
+
+          <DropdownMenuCheckboxItem
+            checked={selectedSort === "Rating (High to Low)"}
+            onClick={() => sortProducts("Rating (High to Low)")}
+            className="focus:bg-slate-800 focus:text-white"
+          >
             Rating (High to Low)
           </DropdownMenuCheckboxItem>
-          <DropdownMenuCheckboxItem className="focus:bg-slate-800 focus:text-white">
+
+          <DropdownMenuCheckboxItem
+            checked={selectedSort === "Rating (Low to High)"}
+            onClick={() => sortProducts("Rating (Low to High)")}
+            className="focus:bg-slate-800 focus:text-white"
+          >
             Rating (Low to High)
           </DropdownMenuCheckboxItem>
-          <DropdownMenuCheckboxItem className="focus:bg-slate-800 focus:text-white">
+
+          <DropdownMenuCheckboxItem
+            checked={selectedSort === "Remove Sorting"}
+            onClick={() => sortProducts("Remove Sorting")}
+            className="focus:bg-slate-800 focus:text-white"
+          >
             Remove Sorting
           </DropdownMenuCheckboxItem>
         </DropdownMenuContent>

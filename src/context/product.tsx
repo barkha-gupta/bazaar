@@ -31,6 +31,8 @@ export interface ProductContextType {
   selectedCategory: string;
   setSelectedCategory: Dispatch<SetStateAction<string>>;
   filteredProductList: Product[];
+  selectedSort: string;
+  sortProducts: (sortType: string) => void;
 }
 
 export const ProductContext = createContext<ProductContextType>({
@@ -39,13 +41,33 @@ export const ProductContext = createContext<ProductContextType>({
   selectedCategory: "",
   setSelectedCategory: () => {},
   filteredProductList: [],
+  selectedSort: "",
+  sortProducts: () => {},
 });
+
+const sortArray = (array: Product[], sortType: string) => {
+  switch (sortType) {
+    case "Price (High to Low)":
+      return array.sort((a, b) => b.price - a.price);
+    case "Price (Low to High)":
+      return array.sort((a, b) => a.price - b.price);
+    case "Rating (High to Low)":
+      return array.sort((a, b) => b.rating.rate - a.rating.rate);
+    case "Rating (Low to High)":
+      return array.sort((a, b) => a.rating.rate - b.rating.rate);
+    case "Remove Sorting":
+      return array;
+    default:
+      return array;
+  }
+};
 
 export const ProductProvider: FC<ProductProviderProps> = ({ children }) => {
   const [productList, setProductList] = useState<Product[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [filteredProductList, setFilteredProductList] = useState<Product[]>([]);
+  const [selectedSort, setSelectedSort] = useState<string>("");
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
@@ -76,6 +98,18 @@ export const ProductProvider: FC<ProductProviderProps> = ({ children }) => {
     filterByCategory(selectedCategory);
   }, [selectedCategory, productList, setFilteredProductList]);
 
+  const sortProducts = (sortType: string) => {
+    if (selectedSort === sortType) return;
+    setSelectedSort(sortType);
+
+    const sortedProducts =
+      sortType === "Remove Sorting"
+        ? productList
+        : sortArray([...filteredProductList], sortType);
+
+    setFilteredProductList(sortedProducts);
+  };
+
   return (
     <ProductContext.Provider
       value={{
@@ -84,6 +118,8 @@ export const ProductProvider: FC<ProductProviderProps> = ({ children }) => {
         selectedCategory,
         setSelectedCategory,
         filteredProductList,
+        selectedSort,
+        sortProducts,
       }}
     >
       {children}
